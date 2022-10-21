@@ -40,7 +40,7 @@
         }
       },
       content_text: {
-        top: ['parent', 'top', -160],
+        top: ['parent', 'top'],
         bottom: ['back_arrow_img', 'bottom'],
         start: ['parent', 'start', 16],
         end: ['parent', 'end', 16],
@@ -54,9 +54,7 @@
         top: ['content_text', 'bottom', -100],
         start: ['parent', 'start', 16],
         end: ['parent', 'end', 16],
-        custom: {
-          visible: 'gone'
-        }
+        visibility: 'invisible',
       },
       box: {  //Background
         width: 'spread',  //spread -> is for fill constraints. Like in XML you'd set width/height = '0dp' to let it fill the available area only.
@@ -120,9 +118,7 @@
         top: ['content_text', 'bottom'],
         start: ['content_text', 'start'],
         end: ['content_text', 'end'],
-        custom: {
-          visible: 'visible'
-        }
+        visibility: 'visible',
       },
       box: {  //Background
         width: 'spread',  //spread -> is for fill constraints. Like in XML you'd set width/height = '0dp' to let it fill the available area only.
@@ -151,11 +147,6 @@
             frames: [0, 50, 100],
             translationX: [0, 70, 0],
           },
-          {
-            target: 'content_text',
-            frames: [0, 100],
-            visibility: ['gone', 'visible']
-          }
           ],
         },
       }
