@@ -2,6 +2,10 @@ package com.example.motionlayoutphilipplackner.ui.composables
 
 import android.util.Log
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,6 +16,7 @@ import androidx.compose.material.icons.rounded.Info
 //import androidx.compose.material.icons.rounded.PrivacyTip
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
@@ -27,11 +32,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
+import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
+import androidx.constraintlayout.compose.MotionLayoutDebugFlags
 import androidx.constraintlayout.compose.MotionScene
 import com.example.motionlayoutphilipplackner.R
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
+import java.util.*
 import kotlin.math.roundToInt
 
 private val ContentPadding = 8.dp
@@ -55,13 +63,8 @@ private val MapHeight = CollapsedCostaRicaHeight * 2
 fun CollapsingToolbar(
     @DrawableRes backgroundImageResId: Int,
     progress: Float,
-    onPrivacyTipButtonClicked: () -> Unit,
-    onSettingsButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    /*val logoPadding = with(LocalDensity.current) {
-        lerp(CollapsedPadding.toPx(), ExpandedPadding.toPx(), progress).toDp()
-    }*/
 
     val context = LocalContext.current  //to get the raw file, we need context.
     Log.d("TAG", "ProfileHeader: progress => $progress")
@@ -77,12 +80,13 @@ fun CollapsingToolbar(
         color = MaterialTheme.colors.primary,
         elevation = Elevation,
         modifier = modifier
-//    MotionLayout(
-//        motionScene = MotionScene(content = motionScene),
-//        progress = progress,
-//        modifier = modifier,
+/*    MotionLayout(
+        motionScene = MotionScene(content = motionScene),
+        progress = progress,
+        modifier = modifier,
+        debug = EnumSet.of(MotionLayoutDebugFlags.SHOW_ALL)*/
     ) {
-//        val propertiesContentImage = motionProperties(id = "content_img")
+
 
         Box(modifier = Modifier.fillMaxSize()) {
             //#region Background Image
@@ -105,65 +109,45 @@ fun CollapsingToolbar(
                     .fillMaxSize()
             ) {
                 CollapsingToolbarLayout(progress = progress) {
-                    //#region Logo Images
-                    /*Image(
-                        painter = painterResource(id = R.drawable.ic_shield),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .height(MapHeight)
-                            .wrapContentWidth()
-                            .graphicsLayer { alpha = ((0.25f - progress) * 4).coerceIn(0f, 1f) },
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
-                    )*/
-                    /*Image(
-                        painter = painterResource(id = R.drawable.logo_costa),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .padding(logoPadding)
-                            .height(costaRicaHeight)
-                            .wrapContentWidth(),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
-                    )
-                    Image(
-                        painter = painterResource(id = R.drawable.logo_rica),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .padding(logoPadding)
-                            .height(costaRicaHeight)
-                            .wrapContentWidth(),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
-                    )
-                    Image(
-                        painter = painterResource(id = R.drawable.logo_wildlife),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .padding(logoPadding)
-                            .height(wildlifeHeight)
-                            .wrapContentWidth(),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
-                    )*/
-                    //#endregion
                     //#region Buttons
-                    /*Image(
-                        painter = painterResource(id = R.drawable.ic_darth_vader),
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .layoutId("content_img"),
-                        contentDescription = "Content image holder"
-                    )*/
-                    Icon(  //Shield icon
-                        painter = painterResource(id = R.drawable.ic_shield), contentDescription = null,
-                        modifier = Modifier
-                            /*.clip(CircleShape)
+                    MotionLayout(
+                        motionScene = MotionScene(content = motionScene),
+                        progress = progress,
+                        modifier = modifier,
+                        debug = EnumSet.of(MotionLayoutDebugFlags.SHOW_ALL)) {
+
+                        val motionTextProperties = motionProperties(id = "motion_text")
+
+
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_darth_vader),
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .layoutId("content_img")
+                                .zIndex(2f),
+                            contentDescription = "Content image holder"
+                        )
+                        /*Icon(  //Shield icon
+                            painter = painterResource(id = R.drawable.ic_shield), contentDescription = null,
+                            modifier = Modifier
+                                .layoutId("content_img"),    // Same ID that we have used in motion_scene.json5
+                            *//*.clip(CircleShape)
                             .border(
                                 width = 2.dp,
             //                    color = Color.Green,
                                 color = propertiesOfProfilePic.value.color(name = "color"),
                                 shape = CircleShape
-                            )*/
-                            .layoutId("content_img"),    // Same ID that we have used in motion_scene.json5
-                        tint = Color.White
-                    )
+                            )*//*
+                            tint = Color.White
+                        )*/
+
+                        Text(
+                            text = "Philippe Philippe",
+                            color = motionTextProperties.value.color("textColor"),
+                            modifier = Modifier.layoutId("motion_text")
+                        )
+
+                    }
                     /*Row(
                         modifier = Modifier.wrapContentSize(),
                         horizontalArrangement = Arrangement.spacedBy(ContentPadding)
@@ -230,58 +214,10 @@ private fun CollapsingToolbarLayout(
             val collapsedHorizontalGuideline = (constraints.maxHeight * 0.5f).roundToInt()
 
             val countryMap = placeables[0]
-            /*val costa = placeables[1]
-            val rica = placeables[2]
-            val wildlife = placeables[3]
-            val buttons = placeables[4]*/
             countryMap.placeRelative(
                 x = 0,
                 y = collapsedHorizontalGuideline - countryMap.height / 2,
             )
-            /*costa.placeRelative(
-                x = lerp(
-                    start = countryMap.width,
-                    stop = constraints.maxWidth / 2 - costa.width,
-                    fraction = progress
-                ),
-                y = lerp(
-                    start = collapsedHorizontalGuideline - costa.height / 2,
-                    stop = expandedHorizontalGuideline - costa.height,
-                    fraction = progress
-                )
-            )
-            rica.placeRelative(
-                x = lerp(
-                    start = countryMap.width + costa.width,
-                    stop = constraints.maxWidth / 2 - rica.width,
-                    fraction = progress
-                ),
-                y = lerp(
-                    start = collapsedHorizontalGuideline - rica.height / 2,
-                    stop = expandedHorizontalGuideline,
-                    fraction = progress
-                )
-            )
-            wildlife.placeRelative(
-                x = lerp(
-                    start = countryMap.width + costa.width + rica.width,
-                    stop = constraints.maxWidth / 2,
-                    fraction = progress
-                ),
-                y = lerp(
-                    start = collapsedHorizontalGuideline - wildlife.height / 2,
-                    stop = expandedHorizontalGuideline + rica.height / 2,
-                    fraction = progress
-                )
-            )
-            buttons.placeRelative(
-                x = constraints.maxWidth - buttons.width,
-                y = lerp(
-                    start = (constraints.maxHeight - buttons.height) / 2,
-                    stop = 0,
-                    fraction = progress
-                )
-            )*/
         }
     }
 }
@@ -293,8 +229,6 @@ fun CollapsingToolbarCollapsedPreview() {
         CollapsingToolbar(
             backgroundImageResId = R.drawable.ic_starwars,
             progress = 0f,
-            onPrivacyTipButtonClicked = {},
-            onSettingsButtonClicked = {},
             modifier = Modifier
                 .fillMaxWidth()
                 .height(80.dp)
@@ -309,8 +243,6 @@ fun CollapsingToolbarHalfwayPreview() {
         CollapsingToolbar(
             backgroundImageResId = R.drawable.ic_starwars,
             progress = 0.5f,
-            onPrivacyTipButtonClicked = {},
-            onSettingsButtonClicked = {},
             modifier = Modifier
                 .fillMaxWidth()
                 .height(120.dp)
@@ -325,8 +257,41 @@ fun CollapsingToolbarExpandedPreview() {
         CollapsingToolbar(
             backgroundImageResId = R.drawable.ic_starwars,
             progress = 1f,
-            onPrivacyTipButtonClicked = {},
-            onSettingsButtonClicked = {},
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(160.dp)
+        )
+    }
+}
+
+@Preview
+@Composable
+fun PreviewMotionLayoutAppBar() {
+    val motionLayoutProgress = remember { Animatable(0.0f) }
+
+    LaunchedEffect(Unit) {
+        motionLayoutProgress.animateTo(
+            1.0f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(
+                    delayMillis = 1000,
+                    durationMillis = 1000,
+                    easing = LinearEasing
+                )
+            )
+        )
+    }
+
+    /*Motion(
+        title = "Title",
+        subTitle = "Subtitle",
+        backgroundColor = Color(0xFF214561),
+        progress = motionLayoutProgress.value
+    )*/
+    MotionLayoutPhilippLacknerTheme {
+        CollapsingToolbar(
+            backgroundImageResId = R.drawable.ic_starwars,
+            progress = motionLayoutProgress.value,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(160.dp)

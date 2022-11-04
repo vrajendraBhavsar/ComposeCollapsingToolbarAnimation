@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.example.motionlayoutphilipplackner.data.dummyData.ListPreviewParameterProvider
 import com.example.motionlayoutphilipplackner.data.model.Item
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
@@ -50,8 +51,8 @@ fun GridItemHandler(
     }
 
     Column(
-        modifier = modifier.verticalScroll(scrollState)
-    ) {
+        modifier = modifier.verticalScroll(scrollState).zIndex(-1f),
+        ) {
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()

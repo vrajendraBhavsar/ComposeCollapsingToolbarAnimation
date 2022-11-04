@@ -3,50 +3,60 @@
   ConstraintSets: { //2 constraint sets - Start and End
     //1. Start Constraint
     start: {
-      content_img: {  // Assigned ID for profile pic, which we'll use in the code for the reference
-        width: 24,
-        height: 24,
-        top: ['parent', 'top'], //bottom Constraint => [Constraining to what, where, Margin]
-        end: ['parent', 'end'], //start Constraint
-
-      },
-      data_content: {
-        bottom: ['parent', 'bottom'],
-        start: ['parent', 'start'],
-        end: ['parent', 'end']
-      },
       collapsing_box: {
-        //Background
         width: 'spread',
-        //spread -> is for fill constraints. Like in XML you'd set width/height = '0dp' to let it fill the available area only.
         height: 56,
         start: ['parent', 'start'],
         end: ['parent', 'end'],
         top: ['parent', 'top'],
-        }
-      },
-
-    //2. End Constraint
-    end: {
-      content_img: {  // Assigned ID for content img, which we'll use in the code for the reference
-        width: 108,
-        height: 108,
-        bottom: ['parent', 'top'], //bottom Constraint => [Constraining to what, where, Margin]
-        start: ['parent', 'start'], //start Constraint
       },
       data_content: {
         bottom: ['parent', 'bottom'],
         start: ['parent', 'start'],
         end: ['parent', 'end']
       },
+      content_img: {  // Assigned ID for profile pic, which we'll use in the code for the reference
+        width: 95,
+        height: 108,
+        bottom: ['data_content', 'top', -60], //bottom Constraint => [Constraining to what, where, Margin]
+        start: ['parent', 'start', 16], //start Constraint
+      },
+      motion_text: {
+        top: ['content_img', 'top'],
+        start: ['content_img', 'end', 16],
+        custom: {
+          textColor: '#FFFFFF'
+        }
+      }
+    },
+    //2. End Constraint
+    end: {
       collapsing_box: {  //Background
         width: 'spread',  //spread -> is for fill constraints. Like in XML you'd set width/height = '0dp' to let it fill the available area only.
         height: 56,
         start: ['parent', 'start'],
         end: ['parent', 'end'],
         top: ['parent', 'top'],
-        //        bottom: ['parent', 'bottom'],  //-16 -> for bottom space
+      },
+      content_img: {  // Assigned ID for content img, which we'll use in the code for the reference
+        width: 95,
+        height: 108,
+        bottom: ['data_content', 'top', -60], //bottom Constraint => [Constraining to what, where, Margin]
+        start: ['parent', 'start', 16], //start Constraint
+      },
+      data_content: {
+        bottom: ['parent', 'bottom'],
+        start: ['parent', 'start'],
+        end: ['parent', 'end']
+      },
+      motion_text: {
+        start: ['content_img', 'start'],
+        top: ['content_img', 'bottom', 8],
+        custom: {
+          textColor: '#2B3784'
+        }
       }
+    }
   },
   Transitions: {  //to set transition properties between Start and End point.
     default: {  //we'll have only one transition between Start and End. So we named it as Default. Your choice after all :D
@@ -56,13 +66,15 @@
       KeyFrames: {
         KeyAttributes: [ //We define different Attr and how we want this to Animate, during transition for specific composable
           {
-            target: 'content_img',
+            target: ['content_img'],
             frames: [0, 50, 100], //For frames we pass a List containing number between 0 - 100
-            rotationY: [0, 180, 0],
+            rotationZ: [0, 50, 0],
+            scaleX: [1, 2, 1],
+            scaleY: [1, 2, 1],
+            translationZ: [0,50,100]
           }
-          ],
+        ],
       },
-      }
     }
   }
 }
