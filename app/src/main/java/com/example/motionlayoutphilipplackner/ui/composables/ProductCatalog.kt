@@ -17,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
@@ -83,6 +84,7 @@ fun ProductCatalog(
                     .layoutId("collapsing_box")
                     .height(with(LocalDensity.current) { toolbarState.height.toDp() })
                     .graphicsLayer { translationY = toolbarState.offset }
+                    .zIndex(1f)
             )
             /**
              * Grid list
@@ -91,7 +93,8 @@ fun ProductCatalog(
                 list = item,
                 columns = columns,
                 modifier = Modifier
-                    .layoutId("data_content"),
+                    .layoutId("data_content")
+                    .zIndex(0f),
                 scrollState = scrollState,
                 contentPadding = PaddingValues(top = MaxToolbarHeight)
             )

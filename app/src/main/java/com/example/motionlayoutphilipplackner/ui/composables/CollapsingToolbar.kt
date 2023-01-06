@@ -8,6 +8,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -20,6 +21,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
@@ -29,6 +31,7 @@ import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
@@ -96,6 +99,7 @@ fun CollapsingToolbar(
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
                     .fillMaxSize()
+                    .zIndex(1f)
                     .graphicsLayer {
                         alpha = progress * Alpha
                     },
@@ -117,8 +121,9 @@ fun CollapsingToolbar(
                         debug = EnumSet.of(MotionLayoutDebugFlags.SHOW_ALL)) {
 
                         val motionTextProperties = motionProperties(id = "motion_text")
-
-
+                        /**
+                         * Main image with Animation - Collapsing
+                         */
                         Image(
                             painter = painterResource(id = R.drawable.ic_darth_vader),
                             contentScale = ContentScale.Crop,
@@ -130,19 +135,20 @@ fun CollapsingToolbar(
                         /*Icon(  //Shield icon
                             painter = painterResource(id = R.drawable.ic_shield), contentDescription = null,
                             modifier = Modifier
-                                .layoutId("content_img"),    // Same ID that we have used in motion_scene.json5
-                            *//*.clip(CircleShape)
+                                .layoutId("content_img")    // Same ID that we have used in motion_scene.json5
+                            .clip(CircleShape)
                             .border(
                                 width = 2.dp,
-            //                    color = Color.Green,
-                                color = propertiesOfProfilePic.value.color(name = "color"),
+                                color = Color.Green,
+//                                color = propertiesOfProfilePic.value.color(name = "color"),
                                 shape = CircleShape
-                            )*//*
-                            tint = Color.White
+                            )
                         )*/
-
+                        /**
+                         * Text - Collapsing
+                         */
                         Text(
-                            text = "Philippe Philippe",
+                            text = stringResource(id = R.string.collapsing_text_star_wars_IX),
                             color = motionTextProperties.value.color("textColor"),
                             modifier = Modifier.layoutId("motion_text")
                         )
@@ -227,7 +233,7 @@ private fun CollapsingToolbarLayout(
 fun CollapsingToolbarCollapsedPreview() {
     MotionLayoutPhilippLacknerTheme {
         CollapsingToolbar(
-            backgroundImageResId = R.drawable.ic_starwars,
+            backgroundImageResId = R.drawable.ic_shield,
             progress = 0f,
             modifier = Modifier
                 .fillMaxWidth()
@@ -241,7 +247,7 @@ fun CollapsingToolbarCollapsedPreview() {
 fun CollapsingToolbarHalfwayPreview() {
     MotionLayoutPhilippLacknerTheme {
         CollapsingToolbar(
-            backgroundImageResId = R.drawable.ic_starwars,
+            backgroundImageResId = R.drawable.ic_shield,
             progress = 0.5f,
             modifier = Modifier
                 .fillMaxWidth()
@@ -255,7 +261,7 @@ fun CollapsingToolbarHalfwayPreview() {
 fun CollapsingToolbarExpandedPreview() {
     MotionLayoutPhilippLacknerTheme {
         CollapsingToolbar(
-            backgroundImageResId = R.drawable.ic_starwars,
+            backgroundImageResId = R.drawable.ic_shield,
             progress = 1f,
             modifier = Modifier
                 .fillMaxWidth()
