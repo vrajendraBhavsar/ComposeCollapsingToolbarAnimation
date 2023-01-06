@@ -233,7 +233,7 @@ private fun CollapsingToolbarLayout(
 fun CollapsingToolbarCollapsedPreview() {
     MotionLayoutPhilippLacknerTheme {
         CollapsingToolbar(
-            backgroundImageResId = R.drawable.ic_shield,
+            backgroundImageResId = R.drawable.ic_starwars,
             progress = 0f,
             modifier = Modifier
                 .fillMaxWidth()
@@ -247,7 +247,7 @@ fun CollapsingToolbarCollapsedPreview() {
 fun CollapsingToolbarHalfwayPreview() {
     MotionLayoutPhilippLacknerTheme {
         CollapsingToolbar(
-            backgroundImageResId = R.drawable.ic_shield,
+            backgroundImageResId = R.drawable.ic_starwars,
             progress = 0.5f,
             modifier = Modifier
                 .fillMaxWidth()
@@ -261,7 +261,7 @@ fun CollapsingToolbarHalfwayPreview() {
 fun CollapsingToolbarExpandedPreview() {
     MotionLayoutPhilippLacknerTheme {
         CollapsingToolbar(
-            backgroundImageResId = R.drawable.ic_shield,
+            backgroundImageResId = R.drawable.ic_starwars,
             progress = 1f,
             modifier = Modifier
                 .fillMaxWidth()
