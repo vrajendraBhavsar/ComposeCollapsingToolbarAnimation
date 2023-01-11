@@ -1,23 +1,24 @@
 package com.example.motionlayoutphilipplackner
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Slider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.core.view.WindowCompat
-import com.example.motionlayoutphilipplackner.data.dummyData.ListPreviewParameterProvider
 import com.example.motionlayoutphilipplackner.data.model.Item
-import com.example.motionlayoutphilipplackner.ui.composables.ProductCatalog
+import com.example.motionlayoutphilipplackner.ui.composables.*
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -48,7 +49,8 @@ class MainActivity : ComponentActivity() {
                     )
                 }
 
-                ScreenContent(populateList())
+//                ScreenContent(populateList())
+                MainScreenContent()
             }
         }
     }
@@ -71,7 +73,7 @@ fun populateList(): List<Item> {
     )
 }
 
-@Composable
+/*@Composable
 fun ScreenContent(item: List<Item>) {
     MotionLayoutPhilippLacknerTheme {
         Column(
@@ -85,5 +87,37 @@ fun ScreenContent(item: List<Item>) {
                 columns = 2,
             )
         }
+    }
+}*/
+
+@Composable
+fun MainScreenContent() {
+    val toolbarHeightRange = with(LocalDensity.current) {
+        MinToolbarHeight.roundToPx()..MaxToolbarHeight.roundToPx()
+    }
+    val toolbarState = rememberToolbarState(toolbarHeightRange)
+    val scrollState = rememberScrollState()
+
+    toolbarState.scrollValue = scrollState.value
+
+    val progress = toolbarState.progress
+
+    Scaffold(//
+        modifier = Modifier
+            .fillMaxSize(),
+        topBar = {
+            ProductCatalog(progress)
+        }
+    ) { padding ->
+        GridItemHandler(
+            list = populateList(),
+            columns = 2,
+            modifier = Modifier
+                .layoutId("data_content")
+                .padding(padding)
+                .zIndex(0f),
+            scrollState = scrollState,
+            contentPadding = PaddingValues(top = MaxToolbarHeight)
+        )
     }
 }

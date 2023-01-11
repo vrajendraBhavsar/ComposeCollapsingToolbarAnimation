@@ -5,7 +5,7 @@
     start: {
       collapsing_box: {
         width: 'spread',
-        height: 56,
+        height: 70,
         start: ['parent', 'start'],
         end: ['parent', 'end'],
         top: ['parent', 'top'],
@@ -16,8 +16,8 @@
         end: ['parent', 'end']
       },
       content_img: {  // Assigned ID for profile pic, which we'll use in the code for the reference
-        width: 95,
-        height: 108,
+        width: 112,
+        height: 136,
         bottom: ['data_content', 'top', -60], //bottom Constraint => [Constraining to what, where, Margin]
         start: ['parent', 'start', 16], //start Constraint
       },
@@ -33,14 +33,14 @@
     end: {
       collapsing_box: {  //Background
         width: 'spread',  //spread -> is for fill constraints. Like in XML you'd set width/height = '0dp' to let it fill the available area only.
-        height: 56,
+        height: 300,
         start: ['parent', 'start'],
         end: ['parent', 'end'],
         top: ['parent', 'top'],
       },
       content_img: {  // Assigned ID for content img, which we'll use in the code for the reference
-        width: 95,
-        height: 108,
+        width: 112,
+        height: 136,
         bottom: ['data_content', 'top', -60], //bottom Constraint => [Constraining to what, where, Margin]
         start: ['parent', 'start', 16], //start Constraint
       },
@@ -67,11 +67,11 @@
         KeyAttributes: [ //We define different Attr and how we want this to Animate, during transition for specific composable
           {
             target: ['content_img'],
-            frames: [0, 50, 100], //For frames we pass a List containing number between 0 - 100
-            rotationZ: [0, 50, 0],
-            scaleX: [1, 2, 1],
-            scaleY: [1, 2, 1],
-            translationZ: [0,50,100]
+            frames: [0, 10, 30, 50, 70, 100], //For frames we pass a List containing number between 0 - 100
+            rotationZ: [0, 10, 20, 50, 15, 0],
+            scaleX: [1, 1.1, 1.3, 2, 1.6 ,1],
+            scaleY: [1, 1.1, 1.3, 2, 1.6 ,1],
+            translationZ: [0, 10, 20, 50, 80, 100]
           }
         ],
       },

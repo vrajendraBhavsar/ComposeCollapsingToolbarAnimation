@@ -47,19 +47,7 @@ import kotlin.math.roundToInt
 
 private val ContentPadding = 8.dp
 private val Elevation = 4.dp
-private val ButtonSize = 24.dp
 private const val Alpha = 0.75f
-
-private val ExpandedPadding = 1.dp
-private val CollapsedPadding = 3.dp
-
-private val ExpandedCostaRicaHeight = 20.dp
-private val CollapsedCostaRicaHeight = 16.dp
-
-private val ExpandedWildlifeHeight = 32.dp
-private val CollapsedWildlifeHeight = 24.dp
-
-private val MapHeight = CollapsedCostaRicaHeight * 2
 
 @OptIn(ExperimentalMotionApi::class)
 @Composable
@@ -83,11 +71,6 @@ fun CollapsingToolbar(
         color = MaterialTheme.colors.primary,
         elevation = Elevation,
         modifier = modifier
-/*    MotionLayout(
-        motionScene = MotionScene(content = motionScene),
-        progress = progress,
-        modifier = modifier,
-        debug = EnumSet.of(MotionLayoutDebugFlags.SHOW_ALL)*/
     ) {
 
 
@@ -132,18 +115,6 @@ fun CollapsingToolbar(
                                 .zIndex(2f),
                             contentDescription = "Content image holder"
                         )
-                        /*Icon(  //Shield icon
-                            painter = painterResource(id = R.drawable.ic_shield), contentDescription = null,
-                            modifier = Modifier
-                                .layoutId("content_img")    // Same ID that we have used in motion_scene.json5
-                            .clip(CircleShape)
-                            .border(
-                                width = 2.dp,
-                                color = Color.Green,
-//                                color = propertiesOfProfilePic.value.color(name = "color"),
-                                shape = CircleShape
-                            )
-                        )*/
                         /**
                          * Text - Collapsing
                          */
@@ -154,42 +125,6 @@ fun CollapsingToolbar(
                         )
 
                     }
-                    /*Row(
-                        modifier = Modifier.wrapContentSize(),
-                        horizontalArrangement = Arrangement.spacedBy(ContentPadding)
-                    ) {
-                        IconButton(
-                            onClick = onPrivacyTipButtonClicked,
-                            modifier = Modifier
-                                .size(ButtonSize)
-                                .background(
-                                    color = LocalContentColor.current.copy(alpha = 0.0f),
-                                    shape = CircleShape
-                                )
-                        ) {
-                            Icon(
-                                modifier = Modifier.fillMaxSize(),
-                                imageVector = Icons.Rounded.Info,
-                                contentDescription = null,
-                            )
-                        }
-                        IconButton(
-                            onClick = onSettingsButtonClicked,
-                            modifier = Modifier
-                                .size(ButtonSize)
-                                .background(
-                                    color = LocalContentColor.current.copy(alpha = 0.0f),
-                                    shape = CircleShape
-                                )
-                        ) {
-                            Icon(
-                                modifier = Modifier.fillMaxSize(),
-                                imageVector = Icons.Rounded.Settings,
-                                contentDescription = null,
-                            )
-                        }
-                    }*/
-                    //#endregion
                 }
             }
         }
@@ -206,8 +141,6 @@ private fun CollapsingToolbarLayout(
         modifier = modifier,
         content = content
     ) { measurables, constraints ->
-//        check(measurables.size == 5) // [0]: Country Map | [1-3]: Logo Images | [4]: Buttons
-
         val placeables = measurables.map {
             it.measure(constraints)
         }
