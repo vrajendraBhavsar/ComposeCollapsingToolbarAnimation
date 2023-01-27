@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -51,6 +52,9 @@ fun rememberToolbarState(toolbarHeightRange: IntRange): ToolbarState {
 @Composable
 fun MotionAppBar(progress: Float) {
     //...Motion layout
+    val toolbarHeightRange = with(LocalDensity.current) {
+        MinToolbarHeight.roundToPx()..MaxToolbarHeight.roundToPx()
+    }
     val context = LocalContext.current  //to get the raw file, we need context.
     Log.d("TAG", "ProfileHeader: progress => $progress")
     val motionScene = remember {    // To include raw file, the JSON5 script file
@@ -68,7 +72,7 @@ fun MotionAppBar(progress: Float) {
         modifier = Modifier
             .fillMaxWidth()
             .background(LeafyGreen)
-//            .height(motionHeight),
+            .height((-1F * progress).dp)
         ) {
 
         val boxProperties = motionProperties(id = "collapsing_box")
@@ -96,7 +100,7 @@ fun MotionAppBar(progress: Float) {
          * bg-image
          **/
         Image(
-            painter = painterResource(id = R.drawable.ic_starwars),
+            painter = painterResource(id = R.drawable.ic_topbar_minion),
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
             modifier = Modifier

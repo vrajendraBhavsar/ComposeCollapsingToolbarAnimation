@@ -69,7 +69,8 @@ fun MotionAppBar() {
             modifier = Modifier
                 .layoutId("data_content")
                 .padding(padding)
-                .zIndex(0f),
+                .zIndex(0f)
+                .padding(top = (200 * progress).dp),
             scrollState = scrollState,
 //            contentPadding = PaddingValues(top = MaxToolbarHeight)
         )
