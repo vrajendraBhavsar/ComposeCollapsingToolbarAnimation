@@ -88,7 +88,6 @@ fun CollapsingToolbar(
                     },
                 alignment = BiasAlignment(0f, 1f - ((1f - progress) * 0.75f))
             )
-            //#endregion
             Box(
                 modifier = Modifier
                     .statusBarsPadding()
@@ -123,7 +122,6 @@ fun CollapsingToolbar(
                             color = motionTextProperties.value.color("textColor"),
                             modifier = Modifier.layoutId("motion_text")
                         )
-
                     }
                 }
             }

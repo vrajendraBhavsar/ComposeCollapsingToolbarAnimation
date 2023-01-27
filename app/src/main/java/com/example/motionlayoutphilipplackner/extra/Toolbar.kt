@@ -1,4 +1,4 @@
-package com.example.motionlayoutphilipplackner.ui.extra
+package com.example.motionlayoutphilipplackner.extra
 
 import android.util.Log
 import android.widget.Toast

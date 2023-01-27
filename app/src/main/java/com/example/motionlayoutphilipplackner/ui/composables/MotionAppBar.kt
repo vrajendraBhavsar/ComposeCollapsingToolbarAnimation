@@ -6,7 +6,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,18 +15,17 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.min
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
@@ -35,7 +33,8 @@ import com.example.motionlayoutphilipplackner.R
 import com.example.motionlayoutphilipplackner.data.dummyData.ListPreviewParameterProvider
 import com.example.motionlayoutphilipplackner.data.model.Item
 import com.example.motionlayoutphilipplackner.ui.management.ToolbarState
-import com.example.motionlayoutphilipplackner.ui.scrollflags.ExitUntilCollapsedState
+import com.example.motionlayoutphilipplackner.extra.scrollflags.ExitUntilCollapsedState
+import com.example.motionlayoutphilipplackner.ui.theme.LeafyGreen
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
 
 val MinToolbarHeight = 96.dp
@@ -50,23 +49,7 @@ fun rememberToolbarState(toolbarHeightRange: IntRange): ToolbarState {
 
 @OptIn(ExperimentalMotionApi::class)
 @Composable
-fun ProductCatalog(progress: Float) {
-
-    /*val motionHeight by animateDpAsState(
-        targetValue = if (lazyScrollState.firstVisibleItemIndex in 0..1) 300.dp else 60.dp,
-        tween(1000)
-    )*/
-
-    /*val toolbarHeightRange = with(LocalDensity.current) {
-        MinToolbarHeight.roundToPx()..MaxToolbarHeight.roundToPx()
-    }
-    val toolbarState = rememberToolbarState(toolbarHeightRange)
-    val scrollState = rememberScrollState()
-
-    toolbarState.scrollValue = scrollState.value
-
-    val progress = toolbarState.progress*/
-
+fun MotionAppBar(progress: Float) {
     //...Motion layout
     val context = LocalContext.current  //to get the raw file, we need context.
     Log.d("TAG", "ProfileHeader: progress => $progress")
@@ -75,52 +58,18 @@ fun ProductCatalog(progress: Float) {
             .readBytes()
             .decodeToString()   //readBytes -> cuz we want motionScene in String
     }
-
-    /*MotionLayout(
-        motionScene = MotionScene(content = motionScene),
-        progress = toolbarState.progress,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        val propertiesOfContentImage = motionProperties(id = "content_img")   //motionProperties -> to get the custom properties
-
-        Box(modifier = modifier) {
-            *//**
-             * Collapsing Toolbar
-             *//*
-            CollapsingToolbar(
-                backgroundImageResId = R.drawable.ic_starwars,
-                progress = toolbarState.progress,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .layoutId("collapsing_box")
-                    .height(with(LocalDensity.current) { toolbarState.height.toDp() })
-                    .graphicsLayer { translationY = toolbarState.offset }
-                    .zIndex(1f)
-            )
-            *//**
-             * Grid list
-             *//*
-            GridItemHandler(
-                list = item,
-                columns = columns,
-                modifier = Modifier
-                    .layoutId("data_content")
-                    .zIndex(0f),
-                scrollState = scrollState,
-                contentPadding = PaddingValues(top = MaxToolbarHeight)
-            )
-        }
-    }*/
-
+    /*val motionHeight by animateDpAsState(
+        targetValue = if (lazyScrollState.firstVisibleItemIndex in 0..1) 300.dp else 60.dp,
+        tween(1000)
+    )*/
     MotionLayout(
         motionScene = MotionScene(content = motionScene),
         progress = progress,
         modifier = Modifier
             .fillMaxWidth()
-//            .background(Color.Red) //Extra space below the image
-//                .animateContentSize(animationSpec = tween(durationMillis = 300))
-//            .height(motionHeight)
-    ) {
+            .background(LeafyGreen)
+//            .height(motionHeight),
+        ) {
 
         val boxProperties = motionProperties(id = "collapsing_box")
         val roundedShape = RoundedCornerShape(
@@ -189,17 +138,14 @@ fun ProductCatalog(progress: Float) {
     }
 }
 
-/*
 @Preview(showBackground = true)
 @Composable
 fun CatalogPreview(
     @PreviewParameter(ListPreviewParameterProvider::class) list: List<Item>
 ) {
     MotionLayoutPhilippLacknerTheme() {
-        ProductCatalog(
-            item = list,
-            columns = 2,
-            modifier = Modifier.fillMaxSize()
+        MotionAppBar(
+            progress = 0.1f
         )
     }
-}*/
+}

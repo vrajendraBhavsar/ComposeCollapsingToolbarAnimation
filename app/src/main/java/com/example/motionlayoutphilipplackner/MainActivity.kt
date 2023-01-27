@@ -3,7 +3,6 @@ package com.example.motionlayoutphilipplackner
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.MaterialTheme
@@ -17,7 +16,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.core.view.WindowCompat
+import com.example.motionlayoutphilipplackner.data.dummyData.populateList
 import com.example.motionlayoutphilipplackner.data.model.Item
+import com.example.motionlayoutphilipplackner.ui.MainScreenContent
 import com.example.motionlayoutphilipplackner.ui.composables.*
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -30,33 +31,13 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MotionLayoutPhilippLacknerTheme {
-                Column {
-                    var progress by remember {
-                        mutableStateOf(0f)
-                    }
-//                    Toolbar(progress = progress)
-                    Slider(value = progress, onValueChange = {
-                        progress = it
-                    }, modifier = Modifier.padding(horizontal = 32.dp))
-                }
-
-                val systemUiController = rememberSystemUiController()
-                val useDarkIcons = !MaterialTheme.colors.isLight
-                SideEffect {
-                    systemUiController.setSystemBarsColor(
-                        Color.Transparent,
-                        darkIcons = useDarkIcons
-                    )
-                }
-
-//                ScreenContent(populateList())
                 MainScreenContent()
             }
         }
     }
 }
 
-fun populateList(): List<Item> {
+/*fun populateList(): List<Item> {
     return listOf(
         Item("The Godfather", itemImage = R.drawable.ic_darth_vader),
         Item("The Shawshank Redemption",itemImage =  R.drawable.ic_darth_vader),
@@ -71,7 +52,7 @@ fun populateList(): List<Item> {
         Item("The Silence of the Lambs",itemImage =  R.drawable.ic_darth_vader),
         Item("E.T. the Extra-Terrestrial",itemImage =  R.drawable.ic_darth_vader)
     )
-}
+}*/
 
 /*@Composable
 fun ScreenContent(item: List<Item>) {
@@ -89,35 +70,3 @@ fun ScreenContent(item: List<Item>) {
         }
     }
 }*/
-
-@Composable
-fun MainScreenContent() {
-    val toolbarHeightRange = with(LocalDensity.current) {
-        MinToolbarHeight.roundToPx()..MaxToolbarHeight.roundToPx()
-    }
-    val toolbarState = rememberToolbarState(toolbarHeightRange)
-    val scrollState = rememberScrollState()
-
-    toolbarState.scrollValue = scrollState.value
-
-    val progress = toolbarState.progress
-
-    Scaffold(//
-        modifier = Modifier
-            .fillMaxSize(),
-        topBar = {
-            ProductCatalog(progress)
-        }
-    ) { padding ->
-        GridItemHandler(
-            list = populateList(),
-            columns = 2,
-            modifier = Modifier
-                .layoutId("data_content")
-                .padding(padding)
-                .zIndex(0f),
-            scrollState = scrollState,
-            contentPadding = PaddingValues(top = MaxToolbarHeight)
-        )
-    }
-}

@@ -1,4 +1,4 @@
-package com.example.motionlayoutphilipplackner.ui.scrollflags
+package com.example.motionlayoutphilipplackner.extra.scrollflags
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue

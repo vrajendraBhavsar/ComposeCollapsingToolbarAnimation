@@ -1,14 +1,15 @@
-package com.example.motionlayoutphilipplackner.ui.scrollflags
+package com.example.motionlayoutphilipplackner.extra.scrollflags
 
 import androidx.compose.runtime.saveable.mapSaver
 import com.example.motionlayoutphilipplackner.ui.management.ScrollFlagState
 
-class ExitUntilCollapsedState(
+class ScrollState(
     heightRange: IntRange,
     scrollValue: Int = 0
 ) : ScrollFlagState(heightRange, scrollValue) {
 
-    override val offset: Float = 0f
+    override val offset: Float
+        get() = -(scrollValue - rangeDifference.toFloat()).coerceIn(0f, minHeight.toFloat())
 
     override val height: Float
         get() = (maxHeight.toFloat() - scrollValue).coerceIn(minHeight.toFloat(), maxHeight.toFloat())
@@ -35,7 +36,7 @@ class ExitUntilCollapsedState(
                     )
                 },
                 restore = {
-                    ExitUntilCollapsedState(
+                    ScrollState(
                         heightRange = (it[minHeightKey] as Int)..(it[maxHeightKey] as Int),
                         scrollValue = it[scrollValueKey] as Int
                     )
