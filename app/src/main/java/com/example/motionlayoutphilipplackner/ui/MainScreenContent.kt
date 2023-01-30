@@ -1,7 +1,8 @@
 package com.example.motionlayoutphilipplackner.ui
 
+import android.annotation.SuppressLint
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -41,11 +42,12 @@ fun MainScreenContent() {
     }
 
 //                ScreenContent(populateList())
-    MotionAppBar()
+    MotionAppBarHandler()
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MotionAppBar() {
+fun MotionAppBarHandler() {
     val toolbarHeightRange = with(LocalDensity.current) {
         MinToolbarHeight.roundToPx()..MaxToolbarHeight.roundToPx()
     }
@@ -69,7 +71,6 @@ fun MotionAppBar() {
             modifier = Modifier
                 .layoutId("data_content")
                 .padding(padding)
-                .zIndex(0f)
                 .padding(top = (200 * progress).dp),
             scrollState = scrollState,
 //            contentPadding = PaddingValues(top = MaxToolbarHeight)

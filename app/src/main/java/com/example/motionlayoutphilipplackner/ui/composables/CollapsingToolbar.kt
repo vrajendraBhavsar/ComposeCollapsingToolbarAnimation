@@ -7,35 +7,22 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Info
-//import androidx.compose.material.icons.rounded.PrivacyTip
-import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.lerp
-import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionLayoutDebugFlags
@@ -82,7 +69,6 @@ fun CollapsingToolbar(
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
                     .fillMaxSize()
-                    .zIndex(1f)
                     .graphicsLayer {
                         alpha = progress * Alpha
                     },
@@ -100,7 +86,8 @@ fun CollapsingToolbar(
                         motionScene = MotionScene(content = motionScene),
                         progress = progress,
                         modifier = modifier,
-                        debug = EnumSet.of(MotionLayoutDebugFlags.SHOW_ALL)) {
+                        debug = EnumSet.of(MotionLayoutDebugFlags.SHOW_ALL)
+                    ) {
 
                         val motionTextProperties = motionProperties(id = "motion_text")
                         /**
@@ -110,8 +97,7 @@ fun CollapsingToolbar(
                             painter = painterResource(id = R.drawable.ic_darth_vader),
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
-                                .layoutId("content_img")
-                                .zIndex(2f),
+                                .layoutId("content_img"),
                             contentDescription = "Content image holder"
                         )
                         /**

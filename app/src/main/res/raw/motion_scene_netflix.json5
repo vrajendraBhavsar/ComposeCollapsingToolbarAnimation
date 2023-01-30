@@ -1,12 +1,11 @@
 {
   // here we will define our Constraint set
   ConstraintSets: { //2 constraint sets - Start and End
-    //1. Start Constraint
+    //1. Collapsed
     start: {
       collapsing_box: {
         width: 'parent',
         height: 120,
-        bottom: ['parent', 'bottom'],
         start: ['parent', 'start'],
         end: ['parent', 'end'],
         top: ['parent', 'top'],
@@ -20,17 +19,17 @@
         width: 112,
         height: 142,
         top: ['collapsing_box', 'bottom', -50], //bottom Constraint => [Constraining to what, where, Margin]
-        start: ['collapsing_box', 'start', 16], //start Constraint
+        start: ['parent', 'start', 16], //start Constraint
       },
       motion_text: {
-        top: ['collapsing_box', 'bottom'],
-        start: ['collapsing_box', 'end', 16],
+        top: ['content_img', 'top'],
+        start: ['content_img', 'end', 16],
         custom: {
           textColor: '#FFFFFF'
         }
       }
     },
-    //2. End Constraint
+    //2. Expanded
     end: {
       collapsing_box: {  //Background
         width: 'parent',  //spread -> is for fill constraints. Like in XML you'd set width/height = '0dp' to let it fill the available area only.
@@ -44,7 +43,7 @@
         width: 112,
         height: 142,
         top: ['collapsing_box', 'bottom', -50], //bottom Constraint => [Constraining to what, where, Margin]
-        start: ['collapsing_box', 'start', 16], //start Constraint
+        start: ['parent', 'start', 16], //start Constraint
       },
       data_content: {
         top: ['collapsing_box', 'bottom', 100],
@@ -52,10 +51,10 @@
         end: ['collapsing_box', 'end']
       },
       motion_text: {
-        start: ['collapsing_box', 'start'],
-        bottom: ['collapsing_box', 'start', 8],
+        start: ['parent]', 'start', 16],
+        top: ['parent]', 'top', 20],
         custom: {
-          textColor: '#2B3784'
+          textColor: '#606C38'
         }
       }
     }
@@ -71,18 +70,17 @@
             target: ['content_img'],
             frames: [0, 2, 4, 8, 50, 100], //For frames we pass a List containing number between 0 - 100
             rotationZ: [0, 10, 20, 50, 15, 0],
-            alpha: [0, 0.2, 0.5, 0.7, 0.9, 1],
-            translationZ: [-1, -0.5, 0, 0.5, 0.7, 1]
+            translationZ: [-1, -0.6, -0.2, 0.2, 0.6, 1]
           },
           {
             target: ['collapsing_box'],
             frames: [0, 2, 4, 8, 50, 100], //For frames we pass a List containing number between 0 - 100
-            translationZ: [1, 0.5, 0, -0.5, -0.7, -1]
+            translationZ: [1, 0.6, 0.2, -0.2, -0.6, -1]
           },
           {
             target: ['data_content'],
             frames: [0, 2, 4, 8, 50, 100], //For frames we pass a List containing number between 0 - 100
-            translationZ: [1, 0.5, 0, -0.5, -0.7, -1]
+            translationZ: [-1, -0.6, -0.2, 0.2, 0.6, 1]
           }
         ],
       },
