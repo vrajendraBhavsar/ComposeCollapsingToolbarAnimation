@@ -17,6 +17,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
@@ -32,7 +33,6 @@ import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
 import com.example.motionlayoutphilipplackner.R
 import com.example.motionlayoutphilipplackner.data.dummyData.ListPreviewParameterProvider
-import com.example.motionlayoutphilipplackner.data.dummyData.populateList
 import com.example.motionlayoutphilipplackner.data.model.Item
 import com.example.motionlayoutphilipplackner.ui.management.ToolbarState
 import com.example.motionlayoutphilipplackner.extra.scrollflags.ExitUntilCollapsedState
@@ -51,7 +51,7 @@ fun rememberToolbarState(toolbarHeightRange: IntRange): ToolbarState {
 
 @OptIn(ExperimentalMotionApi::class)
 @Composable
-fun MotionAppBar(progress: Float) {
+fun MotionAppBar(progress: Float, scrollState: ScrollState? = null) {
     //...Motion layout
     val toolbarHeightRange = with(LocalDensity.current) {
         MinToolbarHeight.roundToPx()..MaxToolbarHeight.roundToPx()
@@ -76,6 +76,14 @@ fun MotionAppBar(progress: Float) {
             .background(LeafyGreen)
 //            .height(motionHeight * progress)
             .height((-1f * progress).dp)
+            /*.graphicsLayer {
+                translationY = -progress / 2f // Parallax effect
+            }*/
+            .graphicsLayer {
+                scrollState?.value?.let {
+                    alpha = (-1f / (-1f * progress)) * it + 1
+                }
+            }
         ) {
 
         val boxProperties = motionProperties(id = "collapsing_box")

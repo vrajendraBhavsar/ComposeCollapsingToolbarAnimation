@@ -1,7 +1,6 @@
 package com.example.motionlayoutphilipplackner.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -15,7 +14,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import com.example.motionlayoutphilipplackner.data.dummyData.populateList
 import com.example.motionlayoutphilipplackner.ui.composables.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -62,7 +60,7 @@ fun MotionAppBarHandler() {
         modifier = Modifier
             .fillMaxSize(),
         topBar = {
-            MotionAppBar(progress)
+            MotionAppBar(progress, scrollState)
         }
     ) { padding ->
         GridItemHandler(
