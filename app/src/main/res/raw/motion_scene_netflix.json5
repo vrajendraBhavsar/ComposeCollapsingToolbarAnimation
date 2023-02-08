@@ -5,12 +5,13 @@
     start: {
       collapsing_box: {
         width: 'parent',
-        height: 120,
-        start: ['collapsing_box', 'start'],
-        end: ['collapsing_box', 'end'],
-        top: ['collapsing_box', 'top'],
+        height: 80,
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        top: ['parent', 'top'],
       },
       data_content: {
+        top: ['collapsing_box', 'bottom', 0],
         bottom: ['parent', 'bottom'],
         start: ['parent', 'start'],
         end: ['parent', 'end']
@@ -18,7 +19,7 @@
       content_img: {  // Assigned ID for profile pic, which we'll use in the code for the reference
         width: 112,
         height: 142,
-        top: ['collapsing_box', 'bottom', -142], //bottom Constraint => [Constraining to what, where, Margin]
+        top: ['data_content', 'top'], //bottom Constraint => [Constraining to what, where, Margin]
         start: ['parent', 'start', 16], //start Constraint
       },
       motion_text: {
@@ -33,8 +34,7 @@
     end: {
       collapsing_box: {  //Background
         width: 'parent',  //spread -> is for fill constraints. Like in XML you'd set width/height = '0dp' to let it fill the available area only.
-        height: 400,
-        bottom: ['parent', 'bottom'],
+        height: 200,
         start: ['parent', 'start'],
         end: ['parent', 'end'],
         top: ['parent', 'top'],
@@ -42,17 +42,17 @@
       content_img: {  // Assigned ID for content img, which we'll use in the code for the reference
         width: 112,
         height: 142,
-        top: ['collapsing_box', 'bottom', -50], //bottom Constraint => [Constraining to what, where, Margin]
+        top: ['data_content', 'top', -10], //bottom Constraint => [Constraining to what, where, Margin]
         start: ['parent', 'start', 16], //start Constraint
       },
       data_content: {
-        top: ['collapsing_box', 'bottom', 100],
+        top: ['collapsing_box', 'bottom', 200],
         start: ['collapsing_box', 'start'],
         end: ['collapsing_box', 'end']
       },
       motion_text: {
-        start: ['parent]', 'start', 16],
-        top: ['parent]', 'top', 20],
+        start: ['parent', 'start', 16],
+        top: ['parent', 'top', 20],
         custom: {
           textColor: '#606C38'
         }

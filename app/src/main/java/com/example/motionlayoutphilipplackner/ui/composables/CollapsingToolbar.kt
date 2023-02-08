@@ -23,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionLayoutDebugFlags
@@ -93,13 +94,13 @@ fun CollapsingToolbar(
                         /**
                          * Main image with Animation - Collapsing
                          */
-                        Image(
+                        /*Image(
                             painter = painterResource(id = R.drawable.ic_darth_vader),
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .layoutId("content_img"),
                             contentDescription = "Content image holder"
-                        )
+                        )*/
                         /**
                          * Text - Collapsing
                          */
@@ -107,6 +108,7 @@ fun CollapsingToolbar(
                             text = stringResource(id = R.string.collapsing_text_star_wars_IX),
                             color = motionTextProperties.value.color("textColor"),
                             modifier = Modifier.layoutId("motion_text")
+                                .zIndex(1f)
                         )
                     }
                 }

@@ -3,6 +3,7 @@ package com.example.motionlayoutphilipplackner.ui
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
@@ -15,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.example.motionlayoutphilipplackner.data.dummyData.populateList
 import com.example.motionlayoutphilipplackner.ui.composables.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -68,13 +70,28 @@ fun MotionAppBarHandler() {
             GridItemHandler(
                 list = populateList(),
                 columns = 2,
-                modifier = Modifier
-                    .layoutId("data_content")
+                modifier = Modifier.fillMaxSize(),
+//                    .layoutId("data_content")
 //                .zIndex(1.1f)
-                    .padding(top = (200 * progress).dp),
+//                    .padding(top = (200 * progress).dp),
                 scrollState = scrollState,
+                progress = progress,
+                lazyListState = lazyScrollState
 //            contentPadding = PaddingValues(top = MaxToolbarHeight)
             )
-        }
-    )
+        })
+ /*    { paddingValues ->
+        GridItemHandler(
+            list = populateList(),
+            columns = 2,
+            modifier = Modifier
+                .layoutId("data_content")
+                .padding(paddingValues)
+                .padding(top = (200 * progress).dp),
+            scrollState = scrollState,
+            progress = progress,
+            lazyListState = lazyScrollState
+//            contentPadding = PaddingValues(top = MaxToolbarHeight)
+        )
+    }*/
 }
