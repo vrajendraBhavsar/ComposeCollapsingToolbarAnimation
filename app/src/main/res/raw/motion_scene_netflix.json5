@@ -6,9 +6,9 @@
       collapsing_box: {
         width: 'parent',
         height: 120,
-        start: ['parent', 'start'],
-        end: ['parent', 'end'],
-        top: ['parent', 'top'],
+        start: ['collapsing_box', 'start'],
+        end: ['collapsing_box', 'end'],
+        top: ['collapsing_box', 'top'],
       },
       data_content: {
         bottom: ['parent', 'bottom'],
@@ -18,7 +18,7 @@
       content_img: {  // Assigned ID for profile pic, which we'll use in the code for the reference
         width: 112,
         height: 142,
-        top: ['collapsing_box', 'bottom', -50], //bottom Constraint => [Constraining to what, where, Margin]
+        top: ['collapsing_box', 'bottom', -142], //bottom Constraint => [Constraining to what, where, Margin]
         start: ['parent', 'start', 16], //start Constraint
       },
       motion_text: {
@@ -67,20 +67,20 @@
       KeyFrames: {
         KeyAttributes: [ //We define different Attr and how we want this to Animate, during transition for specific composable
           {
-            target: ['content_img'],
-            frames: [0, 2, 4, 8, 50, 100], //For frames we pass a List containing number between 0 - 100
-            rotationZ: [0, 10, 20, 50, 15, 0],
-            translationZ: [-1, -0.6, -0.2, 0.2, 0.6, 1]
+            target: ['content_img'], //[expanded -> collapsed]
+            frames: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100], //For frames we pass a List containing number between 0 - 100
+            rotationZ: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0],
+            translationZ: [-1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
           },
           {
             target: ['collapsing_box'],
-            frames: [0, 2, 4, 8, 50, 100], //For frames we pass a List containing number between 0 - 100
-            translationZ: [1, 0.6, 0.2, -0.2, -0.6, -1]
+            frames: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100], //For frames we pass a List containing number between 0 - 100
+            translationZ: [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.0, -0.1, -0.2, -0.3, -0.4, -0.5, -0.6, -0.7, -0.8, -0.9, -1.0]
           },
           {
             target: ['data_content'],
-            frames: [0, 2, 4, 8, 50, 100], //For frames we pass a List containing number between 0 - 100
-            translationZ: [-1, -0.6, -0.2, 0.2, 0.6, 1]
+            frames: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100], //For frames we pass a List containing number between 0 - 100
+            translationZ: [-1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
           }
         ],
       },

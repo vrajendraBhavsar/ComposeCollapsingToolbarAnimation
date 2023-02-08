@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
@@ -51,11 +52,11 @@ fun rememberToolbarState(toolbarHeightRange: IntRange): ToolbarState {
 
 @OptIn(ExperimentalMotionApi::class)
 @Composable
-fun MotionAppBar(progress: Float, scrollState: ScrollState? = null) {
+fun MotionAppBar(progress: Float, lazyListState: LazyListState? = null) {
     //...Motion layout
-    val toolbarHeightRange = with(LocalDensity.current) {
+    /*val toolbarHeightRange = with(LocalDensity.current) {
         MinToolbarHeight.roundToPx()..MaxToolbarHeight.roundToPx()
-    }
+    }*/
     val context = LocalContext.current  //to get the raw file, we need context.
     Log.d("TAG", "ProfileHeader: progress => $progress")
     val motionScene = remember {    // To include raw file, the JSON5 script file
@@ -63,9 +64,8 @@ fun MotionAppBar(progress: Float, scrollState: ScrollState? = null) {
             .readBytes()
             .decodeToString()   //readBytes -> cuz we want motionScene in String
     }
-    val lazyScrollState = rememberLazyListState()
     val motionHeight by animateDpAsState(
-        targetValue = if (lazyScrollState.firstVisibleItemIndex in 0..1) 300.dp else 60.dp,
+        targetValue = if (lazyListState?.firstVisibleItemIndex in 0..1) 300.dp else 60.dp,
         tween(1000)
     )
     MotionLayout(
@@ -76,14 +76,15 @@ fun MotionAppBar(progress: Float, scrollState: ScrollState? = null) {
             .background(LeafyGreen)
 //            .height(motionHeight * progress)
             .height((-1f * progress).dp)
+//            .height(motionHeight)
             /*.graphicsLayer {
                 translationY = -progress / 2f // Parallax effect
             }*/
-            .graphicsLayer {
+            /*.graphicsLayer {
                 scrollState?.value?.let {
                     alpha = (-1f / (-1f * progress)) * it + 1
                 }
-            }
+            }*/
         ) {
 
         val boxProperties = motionProperties(id = "collapsing_box")
@@ -117,8 +118,13 @@ fun MotionAppBar(progress: Float, scrollState: ScrollState? = null) {
             modifier = Modifier
                 .layoutId("collapsing_box")
                 .clip(roundedShape)
-                .fillMaxSize(),
-            alignment = BiasAlignment(0f, 1f - ((1f - progress) * 0.75f))
+                .fillMaxWidth()
+                .height((-1f * progress).dp)
+                .graphicsLayer {
+                    alpha = 1f
+                },
+            alignment = BiasAlignment(0f, 1f - ((1f - progress) * 0.75f)),
+//            alpha = progress + 20// Update alpha based on progress. Expanded -> 1f / Collapsed -> 0f (transparent)
         )
 
         /**
@@ -131,7 +137,9 @@ fun MotionAppBar(progress: Float, scrollState: ScrollState? = null) {
             color = motionTextProperties.value.color("textColor"),
 //                fontWeight = if (progress == 1f) FontWeight.Light else FontWeight.Bold,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.layoutId("motion_text")
+            modifier = Modifier
+                .layoutId("motion_text")
+                .zIndex(1f)
         )
 
         /**
@@ -147,20 +155,22 @@ fun MotionAppBar(progress: Float, scrollState: ScrollState? = null) {
 //                    .zIndex(2f),
             contentDescription = "Content image holder"
         )
-//        /**
-//        * Grid
-//        **/
-//        scrollState?.let { scrollState ->
-//            GridItemHandler(
-//                list = populateList(),
-//                columns = 2,
-//                modifier = Modifier
-//                    .layoutId("data_content")
-//                    .padding(top = (200 * progress).dp),
-//                scrollState = scrollState,
-//    //            contentPadding = PaddingValues(top = MaxToolbarHeight)
-//            )
-//        }
+/*        *//**
+        * Grid
+        **//*
+        scrollState?.let { scrollState ->
+            Log.d("TAG", "!@# MotionAppBar scrollState: ${scrollState.value}")
+            GridItemHandler(
+                list = populateList(),
+                columns = 2,
+                modifier = Modifier
+                    .layoutId("data_content")
+                    .padding(top = (200 * progress).dp)
+                    .background(Color.Red),
+                scrollState = scrollState,
+    //            contentPadding = PaddingValues(top = MaxToolbarHeight)
+            )
+        }*/
     }
 }
 

@@ -33,12 +33,12 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MotionLayoutPhilippLacknerTheme {
-//                MainScreenContent()
-                Surface(
+                MainScreenContent()
+                /*Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
                 ) {
                     CollapsingToolbarParallaxEffect()
-                }
+                }*/
             }
         }
     }

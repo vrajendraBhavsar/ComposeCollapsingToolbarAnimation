@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -51,6 +52,7 @@ fun MotionAppBarHandler() {
     }
     val toolbarState = rememberToolbarState(toolbarHeightRange)
     val scrollState = rememberScrollState()
+    val lazyScrollState = rememberLazyListState()
 
     toolbarState.scrollValue = scrollState.value
 
@@ -60,18 +62,19 @@ fun MotionAppBarHandler() {
         modifier = Modifier
             .fillMaxSize(),
         topBar = {
-            MotionAppBar(progress, scrollState)
-        }
-    ) { padding ->
-        GridItemHandler(
-            list = populateList(),
-            columns = 2,
-            modifier = Modifier
-                .layoutId("data_content")
-                .padding(padding)
-                .padding(top = (200 * progress).dp),
-            scrollState = scrollState,
+            MotionAppBar(progress, lazyScrollState)
+        },
+        content = {
+            GridItemHandler(
+                list = populateList(),
+                columns = 2,
+                modifier = Modifier
+                    .layoutId("data_content")
+//                .zIndex(1.1f)
+                    .padding(top = (200 * progress).dp),
+                scrollState = scrollState,
 //            contentPadding = PaddingValues(top = MaxToolbarHeight)
-        )
-    }
+            )
+        }
+    )
 }
