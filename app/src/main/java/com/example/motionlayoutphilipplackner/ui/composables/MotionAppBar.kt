@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
@@ -112,7 +113,8 @@ fun MotionAppBar(progress: Float, lazyListState: LazyListState? = null) {
                 .layoutId("collapsing_box")
                 .clip(roundedShape)
                 .fillMaxWidth()
-                .height(motionHeight),
+                .height(motionHeight)
+                .zIndex(-10f),
 
 //                .height((-1f * progress).dp),
             /*.graphicsLayer {

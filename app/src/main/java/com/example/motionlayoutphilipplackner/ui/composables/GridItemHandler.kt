@@ -31,6 +31,7 @@ import com.example.motionlayoutphilipplackner.R
 import com.example.motionlayoutphilipplackner.data.dummyData.ListPreviewParameterProvider
 import com.example.motionlayoutphilipplackner.data.model.Item
 import com.example.motionlayoutphilipplackner.ui.theme.BloodRed
+import com.example.motionlayoutphilipplackner.ui.theme.LeafyGreen
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
 
 @Preview(showBackground = true)
@@ -87,7 +88,7 @@ fun GridItemHandler(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .background(BloodRed)
+            .background(LeafyGreen)
 //            .height(motionHeight * progress)
 //            .height((-1f * progress).dp)
 //            .height(motionHeight)
@@ -124,8 +125,8 @@ fun GridItemHandler(
             modifier = Modifier
                 .layoutId("content_img")
 //                .size(width = 72.dp, height = 92.dp)
-                .clip(RoundedCornerShape(5.dp))
-                .zIndex(2f),
+                .clip(RoundedCornerShape(5.dp)),
+//                .zIndex(2f),
             contentDescription = "Content image holder"
         )
 
