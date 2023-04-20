@@ -18,8 +18,7 @@ fun populateList(): List<Item> {
         Item("Casablanca ", itemImage = R.drawable.ic_prestone_minion),
         Item("Forrest Gump", itemImage = R.drawable.ic_vacatiob_minion),
         Item("Star Wars", itemImage = R.drawable.ic_cabana_banana_minion),
-        Item(
-            " The Lord of the Rings", itemImage = R.drawable.ic_hawai_minion),
+        Item("The Lord of the Rings", itemImage = R.drawable.ic_hawai_minion),
         Item("Jurassic Park", itemImage = R.drawable.ic_captain_minion),
         Item("The Deer Hunter", itemImage = R.drawable.ic_prestone_minion),
         Item("Bonnie and Clyde", itemImage = R.drawable.ic_hawai_minion),

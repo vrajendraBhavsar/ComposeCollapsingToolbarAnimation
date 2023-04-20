@@ -1,54 +1,21 @@
 package com.example.motionlayoutphilipplackner.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Slider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.motionlayoutphilipplackner.data.dummyData.populateList
 import com.example.motionlayoutphilipplackner.ui.composables.*
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
-
-@Composable
-fun MainScreenContent() {
-    Column {
-        var progress by remember {
-            mutableStateOf(0f)
-        }
-//                    Toolbar(progress = progress)
-        Slider(value = progress, onValueChange = {
-            progress = it
-        }, modifier = Modifier.padding(horizontal = 32.dp))
-    }
-
-    val systemUiController = rememberSystemUiController()
-    val useDarkIcons = !MaterialTheme.colors.isLight
-    SideEffect {
-        systemUiController.setSystemBarsColor(
-            Color.Transparent,
-            darkIcons = useDarkIcons
-        )
-    }
-
-//                ScreenContent(populateList())
-    MotionAppBarHandler()
-}
+import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MotionAppBarHandler() {
+fun MainScreenContent() {
     val toolbarHeightRange = with(LocalDensity.current) {
         MinToolbarHeight.roundToPx()..MaxToolbarHeight.roundToPx()
     }
@@ -80,18 +47,12 @@ fun MotionAppBarHandler() {
 //            contentPadding = PaddingValues(top = MaxToolbarHeight)
             )
         })
- /*    { paddingValues ->
-        GridItemHandler(
-            list = populateList(),
-            columns = 2,
-            modifier = Modifier
-                .layoutId("data_content")
-                .padding(paddingValues)
-                .padding(top = (200 * progress).dp),
-            scrollState = scrollState,
-            progress = progress,
-            lazyListState = lazyScrollState
-//            contentPadding = PaddingValues(top = MaxToolbarHeight)
-        )
-    }*/
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewMainScreenContent() {
+    MotionLayoutPhilippLacknerTheme {
+        MainScreenContent()
+    }
 }

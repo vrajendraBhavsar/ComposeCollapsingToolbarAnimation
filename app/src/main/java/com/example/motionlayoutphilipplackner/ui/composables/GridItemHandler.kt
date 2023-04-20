@@ -1,5 +1,6 @@
 package com.example.motionlayoutphilipplackner.ui.composables
 
+import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
@@ -34,21 +35,6 @@ import com.example.motionlayoutphilipplackner.ui.theme.BloodRed
 import com.example.motionlayoutphilipplackner.ui.theme.LeafyGreen
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
 
-@Preview(showBackground = true)
-@Composable
-fun GridItemHandlerPreview(
-    @PreviewParameter(ListPreviewParameterProvider::class) list: List<Item>
-) {
-    MotionLayoutPhilippLacknerTheme {
-        GridItemHandler(
-            list = list,
-            columns = 2,
-            modifier = Modifier.fillMaxSize(),
-            progress = 0.5f
-        )
-    }
-}
-
 /**-------------------------------------------------------------------------------------- *
  *                                  W  A  R  N  I  N  G                                   *
  * -------------------------------------------------------------------------------------- *
@@ -71,24 +57,29 @@ fun GridItemHandler(
     val chunkedList = remember(list, columns) {
         list.chunked(columns)
     }
+
+    Log.d("TAG", "!@# GridItemHandler: chunkedList:: ${chunkedList.size}, List:: ${list.size}, scrollState:: ${scrollState.value}")
+
     val context = LocalContext.current  //to get the raw file, we need context.
     val motionScene = remember {    // To include raw file, the JSON5 script file
         context.resources.openRawResource(R.raw.motion_scene_netflix)
             .readBytes()
             .decodeToString()   //readBytes -> cuz we want motionScene in String
     }
-    val motionHeight by animateDpAsState(
+    /*val motionHeight by animateDpAsState(
         targetValue = if (lazyListState?.firstVisibleItemIndex in 0..1) 300.dp else 60.dp,
         tween(1000)
-    )
+    )*/
 
     MotionLayout(
         motionScene = MotionScene(content = motionScene),
         progress = progress,
         modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
+//            .fillMaxWidth()
+//            .wrapContentHeight()
+            .fillMaxSize()
             .background(LeafyGreen)
+//            .padding(bottom = 140.dp)
 //            .height(motionHeight * progress)
 //            .height((-1f * progress).dp)
 //            .height(motionHeight)
@@ -182,8 +173,24 @@ fun GridItemHandler(
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(contentPadding.calculateBottomPadding())
+                    .height(140.dp)
+//                .height(contentPadding.calculateTopPadding())
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GridItemHandlerPreview(
+    @PreviewParameter(ListPreviewParameterProvider::class) list: List<Item>
+) {
+    MotionLayoutPhilippLacknerTheme {
+        GridItemHandler(
+            list = list,
+            columns = 2,
+            modifier = Modifier.fillMaxSize(),
+            progress = 0.5f
+        )
     }
 }
