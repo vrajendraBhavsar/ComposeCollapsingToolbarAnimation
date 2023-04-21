@@ -23,34 +23,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.example.motionlayoutphilipplackner.data.dummyData.ListPreviewParameterProvider
 import com.example.motionlayoutphilipplackner.data.model.Item
+import com.example.motionlayoutphilipplackner.ui.theme.MinionYellowDark
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
 
 private const val BottomBarHeightFraction = 0.14f
 private const val TopBarHeightFraction = BottomBarHeightFraction / 2
 private val BarColor = Color(red = 0f, green = 0f, blue = 0f, alpha = 0.5f)
-
-@Preview(showBackground = true)
-@Composable
-fun AnimalCardPreview(
-    @PreviewParameter(ListPreviewParameterProvider::class) list: List<Item>
-) {
-    MotionLayoutPhilippLacknerTheme() {
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-        ) {
-            list.take(2).forEach {
-                GridItemCard(
-                    item = it,
-                    modifier = Modifier
-                        .padding(2.dp)
-                        .weight(1f)
-                        .wrapContentHeight()
-                )
-            }
-        }
-    }
-}
 
 @Composable
 fun GridItemCard(
@@ -82,7 +60,7 @@ private fun BoxScope.TopBar() {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(TopBarHeightFraction)
-            .background(BarColor)
+            .background(MinionYellowDark)
             .padding(horizontal = 8.dp, vertical = 2.dp)
             .align(Alignment.TopCenter)
     ) {
@@ -147,7 +125,7 @@ private fun BoxScope.BottomBar(text: String) {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(BottomBarHeightFraction)
-            .background(BarColor)
+            .background(MinionYellowDark)
             .align(Alignment.BottomCenter)
     ) {
         Text(
@@ -159,5 +137,28 @@ private fun BoxScope.BottomBar(text: String) {
                 .fillMaxWidth()
                 .align(Alignment.Center)
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GridItemCardPreview(
+    @PreviewParameter(ListPreviewParameterProvider::class) list: List<Item>
+) {
+    MotionLayoutPhilippLacknerTheme() {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+        ) {
+            list.take(2).forEach {
+                GridItemCard(
+                    item = it,
+                    modifier = Modifier
+                        .padding(2.dp)
+                        .weight(1f)
+                        .wrapContentHeight()
+                )
+            }
+        }
     }
 }

@@ -1,5 +1,4 @@
 {
-  // here we will define our Constraint set
   ConstraintSets: { //2 constraint sets - Start and End
     //1. Collapsed
     start: {
@@ -19,13 +18,13 @@
       },
       content_img: {  // Assigned ID for profile pic, which we'll use in the code for the reference
         width: 112,
-        height: 142,
-        top: ['parent', 'top', 30], //bottom Constraint => [Constraining to what, where, Margin]
+        height: 152,
+        top: ['parent', 'top', 40], //bottom Constraint => [Constraining to what, where, Margin]
         start: ['parent', 'start', 16], //start Constraint
       },
       motion_text: {
         top: ['parent', 'top', 50],
-        end: ['parent', 'end', 80],
+        end: ['parent', 'end', 50],
         custom: {
           textColor: '#FFFFFF'
         }
@@ -43,7 +42,7 @@
       },
       content_img: {  // Assigned ID for content img, which we'll use in the code for the reference
         width: 112,
-        height: 142,
+        height: 152,
         top: ['data_content', 'top', -10], //bottom Constraint => [Constraining to what, where, Margin]
         start: ['parent', 'start', 16], //start Constraint
 //        translationZ: 10
@@ -80,7 +79,6 @@
           {
             target: ['collapsing_box'],
             frames: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100], //For frames we pass a List containing number between 0 - 100
-//            translationZ: [-1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
           },
           {
             target: ['data_content'],

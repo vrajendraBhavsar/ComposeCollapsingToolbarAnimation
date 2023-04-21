@@ -27,7 +27,7 @@ fun MainScreenContent() {
 
     val progress = toolbarState.progress
 
-    Scaffold(//
+    Scaffold(
         modifier = Modifier
             .fillMaxSize(),
         topBar = {
@@ -38,13 +38,9 @@ fun MainScreenContent() {
                 list = populateList(),
                 columns = 2,
                 modifier = Modifier.fillMaxSize(),
-//                    .layoutId("data_content")
-//                .zIndex(1.1f)
-//                    .padding(top = (200 * progress).dp),
                 scrollState = scrollState,
                 progress = progress,
                 lazyListState = lazyScrollState
-//            contentPadding = PaddingValues(top = MaxToolbarHeight)
             )
         })
 }

@@ -9,7 +9,6 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import com.example.motionlayoutphilipplackner.ui.MainScreenContent
-import com.example.motionlayoutphilipplackner.ui.temp.CollapsingToolbarParallaxEffect
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +22,6 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
                 ) {
-//                    CollapsingToolbarParallaxEffect()
                     MainScreenContent()
                 }
             }
