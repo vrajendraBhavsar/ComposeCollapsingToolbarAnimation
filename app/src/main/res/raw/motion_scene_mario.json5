@@ -18,19 +18,30 @@
         end: ['parent', 'end']
       },
       content_img: {  // Assigned ID for profile pic, which we'll use in the code for the reference
-        width: 120,
-        height: 162,
+        width: 90,
+        height: 142,
         top: ['parent', 'top', 100], //bottom Constraint => [Constraining to what, where, Margin]
         start: ['parent', 'start', 16], //start Constraint
       },
       motion_text: {
-        top: ['parent', 'top', 30],
+        top: ['parent', 'top', 50],
         start: ['parent', 'start', 16],
-        custom: {
-          textColor: '#f5f5f5',
-          textSize: 24
-        }
+        translationZ: -7
       },
+      piranha_flower: {
+        width: 40,
+        height: 90,
+        top: ['collapsing_box', 'bottom', -75],
+        end: ['parent', 'end', 20],
+        translationZ: -8
+      },
+      piranha_tunnel: {
+        width: 60,
+        height: 100,
+        top: ['collapsing_box', 'bottom', -35],
+        end: ['parent', 'end', 10],
+        translationZ: -8
+      }
     },
     //2. Expanded
     end: {
@@ -44,8 +55,8 @@
         alpha: 1
       },
       content_img: {  // Assigned ID for content img, which we'll use in the code for the reference
-        width: 120,
-        height: 162,
+        width: 90,
+        height: 142,
         top: ['data_content', 'top', -70], //bottom Constraint => [Constraining to what, where, Margin]
         start: ['parent', 'start', 4], //start Constraint
 //        translationZ: 10
@@ -57,11 +68,21 @@
       },
       motion_text: {
         bottom: ['collapsing_box', 'bottom', 10],
-        start: ['content_img', 'end', 2],
-        custom: {
-          textColor: '#e4000f',
-          textSize: 16
-        }
+        start: ['content_img', 'end', 2]
+      },
+      piranha_flower: {
+        width: 40,
+        height: 90,
+        top: ['collapsing_box', 'bottom', 80],
+        end: ['parent', 'end', 20],
+        translationZ: -10
+      },
+      piranha_tunnel: {
+        width: 60,
+        height: 100,
+        top: ['collapsing_box', 'bottom', -20],
+        end: ['parent', 'end', 10],
+        translationZ: -10
       }
     }
   },
@@ -78,7 +99,7 @@
             rotationZ: [0, 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, 81, 72, 63, 54, 45, 36, 27, 18, 9, 0],  //For dangling effect
             translationX: [0, 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, 81, 72, 63, 54, 45, 36, 27, 18, 9, 0],
             translationY: [0, -14, -28, -42, -56, -70, -84, -98, -112, -126, -130, -126, -112, -98, -84, -70, -56, -42, -28, -14, 0],
-            translationZ: [-1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0] //1 => ,-1 =>
+            translationZ: [-1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1] //1 => ,-1 =>
           },
           {
             target: ['collapsing_box'],

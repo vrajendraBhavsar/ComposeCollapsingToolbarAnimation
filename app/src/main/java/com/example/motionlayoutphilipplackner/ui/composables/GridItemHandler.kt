@@ -35,6 +35,7 @@ import androidx.constraintlayout.compose.MotionScene
 import com.example.motionlayoutphilipplackner.R
 import com.example.motionlayoutphilipplackner.data.dummyData.ListPreviewParameterProvider
 import com.example.motionlayoutphilipplackner.data.model.Item
+import com.example.motionlayoutphilipplackner.ui.theme.MarioRedDark
 import com.example.motionlayoutphilipplackner.ui.theme.MarioRedLight
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
 
@@ -64,7 +65,7 @@ fun GridItemHandler(
     Log.d("TAG", "!@# GridItemHandler: chunkedList:: ${chunkedList.size}, List:: ${list.size}, scrollState:: ${scrollState.value}")
 
     val motionScene = remember {    // To include raw file, the JSON5 script file
-        context.resources.openRawResource(R.raw.motion_scene_minion)
+        context.resources.openRawResource(R.raw.motion_scene_mario)
             .readBytes()
             .decodeToString()   //readBytes -> cuz we want motionScene in String
     }
@@ -110,26 +111,23 @@ fun GridItemHandler(
         /**
          * Text - Collapsing
          */
-        val textColorProperties = motionProperties(id = "motion_text")
-
         Text(
             text = stringResource(id = R.string.collapsing_text_minion),
-            color = textColorProperties.value.color("textColor"),
-            fontWeight = FontWeight.Bold,
+            color = MarioRedDark,
             modifier = Modifier
                 .layoutId("motion_text")
                 .zIndex(1f),
             fontFamily = FontFamily(
                 Font(R.font.super_mario_bros, FontWeight.Light)
             ),
-            fontSize = textColorProperties.value.fontSize("textSize")
+            fontSize = 14.sp
         )
 
         /**
          * Main image
          **/
         Image(
-            painter = painterResource(id = R.drawable.ic_mario),
+            painter = painterResource(id = R.drawable.ic_mario_reversed),
             contentScale = ContentScale.Fit,
             modifier = Modifier
                 .layoutId("content_img")
@@ -193,6 +191,28 @@ fun GridItemHandler(
                     .height(140.dp)
             )
         }
+
+        /**
+         * piranha flower
+         **/
+        Image(
+            painter = painterResource(id = R.drawable.ic_piranha_flower),
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .layoutId("piranha_flower"),
+            contentDescription = "Content image holder"
+        )
+
+        /**
+         * piranha tunnel
+         **/
+        Image(
+            painter = painterResource(id = R.drawable.ic_piranha_tunnel),
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .layoutId("piranha_tunnel"),
+            contentDescription = "Content image holder"
+        )
     }
 //    Log.d("TAG", "!@# GridItemHandler: chunkedList:: ${chunkedList.size}, List:: ${list.size}, scrollState:: ${scrollState.value}")
 }
