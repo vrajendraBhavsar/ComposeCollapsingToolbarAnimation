@@ -11,6 +11,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
@@ -18,10 +21,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
@@ -29,7 +35,7 @@ import androidx.constraintlayout.compose.MotionScene
 import com.example.motionlayoutphilipplackner.R
 import com.example.motionlayoutphilipplackner.data.dummyData.ListPreviewParameterProvider
 import com.example.motionlayoutphilipplackner.data.model.Item
-import com.example.motionlayoutphilipplackner.ui.theme.MinionYellowLight
+import com.example.motionlayoutphilipplackner.ui.theme.MarioRedLight
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
 
 /**-------------------------------------------------------------------------------------- *
@@ -68,7 +74,7 @@ fun GridItemHandler(
         progress = progress,
         modifier = Modifier
             .fillMaxSize()
-            .background(MinionYellowLight)
+            .background(MarioRedLight)
     ) {
         val boxProperties = motionProperties(id = "collapsing_box")
         val roundedShape = RoundedCornerShape(
@@ -80,36 +86,51 @@ fun GridItemHandler(
          * bg-image
          **/
         Image(
-            painter = painterResource(id = R.drawable.ic_topbar_minion),
+            painter = painterResource(id = R.drawable.ic_mario_level),
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
                 .layoutId("collapsing_box")
                 .clip(roundedShape)
-                .fillMaxWidth(),
-            alignment = BiasAlignment(0f, 1f - ((1f - progress) * 0.75f)),
+                .fillMaxWidth()
+                .drawWithCache {
+                    val gradient = Brush.verticalGradient(
+                        colors = listOf(Color.Transparent, Color.Black),
+                        startY = size.height / 3,
+                        endY = size.height
+                    )
+                    onDrawWithContent {
+                        drawContent()
+                        drawRect(gradient, blendMode = BlendMode.Multiply)
+                    }
+                },
+            alignment = BiasAlignment(0f, 1f - ((1f - progress) * 0.50f)),
         )
 
         /**
          * Text - Collapsing
          */
-        val motionTextProperties = motionProperties(id = "motion_text")
+        val textColorProperties = motionProperties(id = "motion_text")
 
         Text(
             text = stringResource(id = R.string.collapsing_text_minion),
-            color = motionTextProperties.value.color("textColor"),
+            color = textColorProperties.value.color("textColor"),
             fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .layoutId("motion_text")
-                .zIndex(1f)
+                .zIndex(1f),
+            fontFamily = FontFamily(
+                Font(R.font.super_mario_bros, FontWeight.Light)
+            ),
+            fontSize = textColorProperties.value.fontSize("textSize")
         )
 
         /**
          * Main image
          **/
         Image(
-            painter = painterResource(id = R.drawable.ic_minion_primary_image),
-            contentScale = ContentScale.FillBounds,
+            painter = painterResource(id = R.drawable.ic_mario),
+            contentScale = ContentScale.Fit,
             modifier = Modifier
                 .layoutId("content_img")
                 .clip(RoundedCornerShape(5.dp)),
@@ -122,7 +143,8 @@ fun GridItemHandler(
         Column(
             modifier = modifier
                 .verticalScroll(scrollState)
-                .layoutId("data_content"),
+                .layoutId("data_content")
+                .background(MarioRedLight),
         ) {
             Spacer(
                 modifier = Modifier

@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.example.motionlayoutphilipplackner.data.dummyData.ListPreviewParameterProvider
 import com.example.motionlayoutphilipplackner.data.model.Item
+import com.example.motionlayoutphilipplackner.ui.theme.MarioRedDark
 import com.example.motionlayoutphilipplackner.ui.theme.MinionYellowDark
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
 
@@ -39,13 +40,13 @@ fun GridItemCard(
         modifier = modifier.aspectRatio(0.66f),
         shape = RoundedCornerShape(8.dp)
     ) {
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier.fillMaxSize().background(Color.White)) {
             item.itemImage?.let { painterResource(it) }?.let {
                 Image(
                     painter = it,
                     contentDescription = item.itemDescription,
                     contentScale = ContentScale.FillWidth,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.padding(35.dp).fillMaxWidth()
                 )
             }
             TopBar()
@@ -60,7 +61,7 @@ private fun BoxScope.TopBar() {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(TopBarHeightFraction)
-            .background(MinionYellowDark)
+            .background(MarioRedDark)
             .padding(horizontal = 8.dp, vertical = 2.dp)
             .align(Alignment.TopCenter)
     ) {
@@ -125,7 +126,7 @@ private fun BoxScope.BottomBar(text: String) {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(BottomBarHeightFraction)
-            .background(MinionYellowDark)
+            .background(MarioRedDark)
             .align(Alignment.BottomCenter)
     ) {
         Text(
