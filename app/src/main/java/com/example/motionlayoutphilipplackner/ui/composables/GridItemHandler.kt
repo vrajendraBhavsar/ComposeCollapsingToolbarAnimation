@@ -8,8 +8,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
@@ -48,15 +50,12 @@ fun GridItemHandler(
     progress: Float,
     lazyListState: LazyListState? = null
 ) {
+    val context = LocalContext.current  //to get the raw file, we need context.
 
     val chunkedList = remember(list, columns) {
         list.chunked(columns)
     }
-
     Log.d("TAG", "!@# GridItemHandler: chunkedList:: ${chunkedList.size}, List:: ${list.size}, scrollState:: ${scrollState.value}")
-
-    val context = LocalContext.current  //to get the raw file, we need context.
-    val gridScrollState = rememberScrollState()
 
     val motionScene = remember {    // To include raw file, the JSON5 script file
         context.resources.openRawResource(R.raw.motion_scene_minion)
@@ -71,15 +70,15 @@ fun GridItemHandler(
             .fillMaxSize()
             .background(MinionYellowLight)
     ) {
-        /*val boxProperties = motionProperties(id = "collapsing_box")
+        val boxProperties = motionProperties(id = "collapsing_box")
         val roundedShape = RoundedCornerShape(
             bottomStart = boxProperties.value.int("roundValue").dp,
             bottomEnd = boxProperties.value.int("roundValue").dp
         )
 
-        *//**
+        /**
          * bg-image
-         **//*
+         **/
         Image(
             painter = painterResource(id = R.drawable.ic_topbar_minion),
             contentDescription = null,
@@ -89,7 +88,7 @@ fun GridItemHandler(
                 .clip(roundedShape)
                 .fillMaxWidth(),
             alignment = BiasAlignment(0f, 1f - ((1f - progress) * 0.75f)),
-        )*/
+        )
 
         /**
          * Text - Collapsing

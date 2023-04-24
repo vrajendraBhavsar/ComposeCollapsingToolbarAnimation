@@ -6,12 +6,26 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.motionlayoutphilipplackner.data.dummyData.populateList
+import com.example.motionlayoutphilipplackner.extra.scrollflags.ExitUntilCollapsedState
 import com.example.motionlayoutphilipplackner.ui.composables.*
+import com.example.motionlayoutphilipplackner.ui.management.ToolbarState
 import com.example.motionlayoutphilipplackner.ui.theme.MotionLayoutPhilippLacknerTheme
+
+val MinToolbarHeight = 96.dp
+val MaxToolbarHeight = 176.dp
+
+@Composable
+fun rememberToolbarState(toolbarHeightRange: IntRange): ToolbarState {
+    return rememberSaveable(saver = ExitUntilCollapsedState.Saver) {
+        ExitUntilCollapsedState(toolbarHeightRange)
+    }
+}
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -31,7 +45,7 @@ fun MainScreenContent() {
         modifier = Modifier
             .fillMaxSize(),
         topBar = {
-            MotionAppBar(progress, lazyScrollState)
+//            MotionAppBar(progress, lazyScrollState)
         },
         content = {
             GridItemHandler(
