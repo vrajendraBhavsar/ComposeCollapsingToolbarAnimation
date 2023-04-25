@@ -1,5 +1,5 @@
 {
-  ConstraintSets: { //2 constraint sets - Start and End
+  ConstraintSets: { //Two constraint sets - Start and End
     //1. Collapsed
     start: {
       collapsing_box: {
@@ -7,7 +7,7 @@
         height: 200,
         start: ['parent', 'start'],
         end: ['parent', 'end'],
-        bottom: ['parent', 'top', -90],
+        bottom: ['parent', 'top', -130],
         translationZ: -10,
         alpha: 0
       },
@@ -24,21 +24,21 @@
         start: ['parent', 'start', 16], //start Constraint
       },
       motion_text: {
-        top: ['parent', 'top', 50],
+        top: ['parent', 'top', 55],
         start: ['parent', 'start', 16],
         translationZ: -7
       },
       piranha_flower: {
         width: 40,
         height: 90,
-        top: ['collapsing_box', 'bottom', -75],
+        top: ['collapsing_box', 'bottom', -110],
         end: ['parent', 'end', 20],
         translationZ: -8
       },
       piranha_tunnel: {
         width: 60,
         height: 100,
-        top: ['collapsing_box', 'bottom', -35],
+        top: ['collapsing_box', 'bottom', -70],
         end: ['parent', 'end', 10],
         translationZ: -8
       }
