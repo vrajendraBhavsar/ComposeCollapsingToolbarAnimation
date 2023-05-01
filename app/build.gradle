@@ -7,7 +7,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.motionlayoutphilipplackner"
+        applicationId "com.example.collapsingToolbarWithMotionCompose"
         minSdk 21
         targetSdk 33
         versionCode 1
@@ -80,4 +80,7 @@ dependencies {
 
     //Constraint layout motion
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+
+//    implementation "androidx.compose.foundation:foundation:1.4.2"
+
 }
