@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     val systemUiController = rememberSystemUiController()
                     val useDarkIcons = MaterialTheme.colors.isLight
 
-                    // Set the status bar color to red
+                    // To set the status bar color
                     SideEffect {
                         systemUiController.setSystemBarsColor(
                             color = MarioRedDark,

@@ -3,7 +3,6 @@ package com.example.collapsingToolbarWithMotionCompose.ui.composables
 import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -54,8 +53,7 @@ fun MotionHandler(
     modifier: Modifier = Modifier,
     scrollState: ScrollState = rememberScrollState(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    progress: Float,
-    lazyListState: LazyListState? = null
+    progress: Float
 ) {
     val context = LocalContext.current  //to get the raw file, we need context.
 
@@ -67,7 +65,7 @@ fun MotionHandler(
     val motionScene = remember {    // To include raw file, the JSON5 script file
         context.resources.openRawResource(R.raw.motion_scene_mario)
             .readBytes()
-            .decodeToString()   //readBytes -> cuz we want motionScene in String
+            .decodeToString()   //readBytes -> cuz we want motionScene in a String format
     }
 
     MotionLayout(
@@ -77,9 +75,9 @@ fun MotionHandler(
             .fillMaxSize()
             .background(MarioRedLight)
     ) {
-        val boxProperties = motionProperties(id = "collapsing_box")
+        val boxProperties = motionProperties(id = "collapsing_box") //Component for which we have defined custom properties
         val roundedShape = RoundedCornerShape(
-            bottomStart = boxProperties.value.int("roundValue").dp,
+            bottomStart = boxProperties.value.int("roundValue").dp, //This way you can use custom properties which is defined inside motion scene
             bottomEnd = boxProperties.value.int("roundValue").dp
         )
 
@@ -214,7 +212,6 @@ fun MotionHandler(
             contentDescription = "Content image holder"
         )
     }
-//    Log.d("TAG", "!@# GridItemHandler: chunkedList:: ${chunkedList.size}, List:: ${list.size}, scrollState:: ${scrollState.value}")
 }
 
 @Preview(showBackground = true)

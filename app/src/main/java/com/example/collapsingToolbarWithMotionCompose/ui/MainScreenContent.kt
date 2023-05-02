@@ -35,7 +35,6 @@ fun MainScreenContent() {
     }
     val toolbarState = rememberToolbarState(toolbarHeightRange)
     val scrollState = rememberScrollState()
-    val lazyScrollState = rememberLazyListState()
 
     toolbarState.scrollValue = scrollState.value
 
@@ -50,8 +49,7 @@ fun MainScreenContent() {
                 columns = 2,
                 modifier = Modifier.fillMaxSize(),
                 scrollState = scrollState,
-                progress = progress,
-                lazyListState = lazyScrollState
+                progress = progress
             )
         })
 }
