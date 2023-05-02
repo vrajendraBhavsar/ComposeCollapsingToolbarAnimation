@@ -10,8 +10,8 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import com.example.collapsingToolbarWithMotionCompose.ui.MainScreenContent
-import com.example.collapsingToolbarWithMotionCompose.ui.theme.MarioRedDark
 import com.example.collapsingToolbarWithMotionCompose.ui.theme.CollapsingToolbarWithMotionComposeTheme
+import com.example.collapsingToolbarWithMotionCompose.ui.theme.MarioRedDark
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {

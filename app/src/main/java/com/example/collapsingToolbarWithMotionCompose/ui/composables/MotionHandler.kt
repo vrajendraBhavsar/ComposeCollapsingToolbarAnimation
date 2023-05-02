@@ -34,9 +34,9 @@ import androidx.constraintlayout.compose.MotionScene
 import com.example.collapsingToolbarWithMotionCompose.R
 import com.example.collapsingToolbarWithMotionCompose.data.dummyData.ListPreviewParameterProvider
 import com.example.collapsingToolbarWithMotionCompose.data.model.Item
+import com.example.collapsingToolbarWithMotionCompose.ui.theme.CollapsingToolbarWithMotionComposeTheme
 import com.example.collapsingToolbarWithMotionCompose.ui.theme.MarioRedDark
 import com.example.collapsingToolbarWithMotionCompose.ui.theme.MarioRedLight
-import com.example.collapsingToolbarWithMotionCompose.ui.theme.CollapsingToolbarWithMotionComposeTheme
 
 /**-------------------------------------------------------------------------------------- *
  *                                  W  A  R  N  I  N  G                                   *
@@ -75,7 +75,8 @@ fun MotionHandler(
             .fillMaxSize()
             .background(MarioRedLight)
     ) {
-        val boxProperties = motionProperties(id = "collapsing_box") //Component for which we have defined custom properties
+        val boxProperties =
+            motionProperties(id = "collapsing_box") //Component for which we have defined custom properties
         val roundedShape = RoundedCornerShape(
             bottomStart = boxProperties.value.int("roundValue").dp, //This way you can use custom properties which is defined inside motion scene
             bottomEnd = boxProperties.value.int("roundValue").dp

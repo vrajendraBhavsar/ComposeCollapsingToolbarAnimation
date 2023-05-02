@@ -87,7 +87,7 @@
     }
   },
   Transitions: {  //to set transition properties between Start and End point.
-    default: {  //we'll have only one transition between Start and End. So we named it as Default. Your choice after all :D
+    default: {  
       from: 'start',
       to: 'end',
       pathMotionArc: 'startHorizontal', // Text will move down with slight circular arc
